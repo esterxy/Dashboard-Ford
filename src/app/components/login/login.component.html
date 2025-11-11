@@ -1,0 +1,65 @@
+<div class="login-page-container">
+  
+  <div class="image-column">
+    <img src="assets/img/ranger.png" alt="Ford Ranger">
+  </div>
+
+  <div class="login-column">
+    <div class="login-wrapper">
+      <img src="assets/img/ford.png" alt="Logo da Ford" class="ford-logo-top">
+      
+      <h2 class="welcome-title">Boas-vindas</h2>
+
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <mat-form-field appearance="outline" class="full-width-field">
+          <mat-icon matPrefix>email</mat-icon> <input 
+            matInput 
+            placeholder="Insira seu e-mail"
+            required
+            name="email"
+            [(ngModel)]="username"
+            #emailInput="ngModel"
+          >
+          <mat-error *ngIf="emailInput.invalid && emailInput.touched">
+            E-mail é obrigatório.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-field">
+          <mat-icon matPrefix>lock</mat-icon> <input 
+            matInput 
+            type="password" 
+            placeholder="Insira sua senha"
+            required
+            name="password"
+            [(ngModel)]="password"
+            #passwordInput="ngModel"
+          >
+          <mat-icon matSuffix>visibility_off</mat-icon> <mat-error *ngIf="passwordInput.invalid && passwordInput.touched">
+            Senha é obrigatória.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="toggle-container">
+          <mat-slide-toggle [(ngModel)]="rememberMe" name="rememberMe">
+            Logar automaticamente
+          </mat-slide-toggle>
+        </div>
+
+        <div *ngIf="loginError" class="alert-error">
+          Usuário ou senha inválidos.
+        </div>
+
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          [disabled]="loginForm.invalid"
+          class="full-width-button"
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

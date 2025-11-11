@@ -1,0 +1,159 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+.login-page-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #ffffff; 
+  overflow: hidden; 
+}
+
+.image-column {
+  flex: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.image-column img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.login-column {
+  flex: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8; 
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.login-wrapper {
+  max-width: 450px; 
+  width: 100%;
+  padding: 30px;
+  background-color: #ffffff; 
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); 
+  text-align: center; 
+}
+
+.ford-logo-top {
+  width: 120px; 
+  height: auto;
+  margin-bottom: 30px; 
+}
+
+.welcome-title {
+  font-size: 2em;
+  font-weight: 600;
+  color: #000e4b; 
+  margin-bottom: 30px;
+}
+
+.full-width-field {
+  width: 100%;
+  margin-bottom: 20px; 
+}
+
+.full-width-field mat-label {
+    color: rgba(0, 0, 0, 0.6); 
+}
+
+.full-width-field mat-icon {
+    color: rgba(0, 0, 0, 0.54); 
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: flex-start; 
+  margin-top: -10px; 
+  margin-bottom: 25px; 
+}
+
+.alert-error {
+  color: #f44336; 
+  background-color: #ffebee; 
+  border: 1px solid #f44336;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.full-width-button {
+  width: 100%;
+  padding: 15px 0;
+  font-size: 1.15em;
+  font-weight: bold;
+}
+
+
+@media (max-width: 992px) {
+  .login-page-container {
+    flex-direction: column;
+  }
+
+  .image-column {
+    min-height: 250px; 
+    padding: 15px;
+  }
+
+  .login-column {
+    padding: 30px 15px;
+  }
+
+  .login-wrapper {
+    padding: 25px;
+    max-width: 380px;
+  }
+
+  .ford-logo-top {
+    width: 100px;
+    margin-bottom: 25px;
+  }
+
+  .welcome-title {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+  }
+
+  .full-width-field {
+    margin-bottom: 15px;
+  }
+
+  .toggle-container {
+    margin-bottom: 20px;
+  }
+
+  .full-width-button {
+    padding: 12px 0;
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 576px) {
+    .image-column {
+        min-height: 180px;
+    }
+    .login-wrapper {
+        padding: 20px;
+    }
+    .ford-logo-top {
+        width: 80px;
+        margin-bottom: 20px;
+    }
+    .welcome-title {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+    .full-width-button {
+        padding: 10px 0;
+        font-size: 1em;
+    }
+}
