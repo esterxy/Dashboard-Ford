@@ -1,3 +1,5 @@
+
+
 mat-sidenav-container {
   height: 100%;
 }
@@ -9,4 +11,22 @@ mat-sidenav{
   background-color: white;
   width: 250px;
 
+}
+
+#ford-logo-top{
+  width: 85px;
+
+}
+
+:host{
+  display: block;
+  height: 100vh;
+}
+
+:host ::ng-deep .mat-sidenav-container {
+  background-color: transparent;
+}
+
+:host ::ng-deep .mat-sidenav-content {
+  background-color: transparent;
 }
