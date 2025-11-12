@@ -3,12 +3,12 @@
   display: flex;
   min-height: 100vh;
   width: 100vw;
-  background-color: #ffffff; 
-  overflow: hidden; 
+  background-color: #ffffff;
+  overflow: hidden;
 }
 
 .image-column {
-  flex: 1; 
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,61 +23,61 @@
 }
 
 .login-column {
-  flex: 1; 
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f8f8f8; 
+  background-color: #f8f8f8;
   padding: 40px 20px;
   box-sizing: border-box;
 }
 
 .login-wrapper {
-  max-width: 450px; 
+  max-width: 450px;
   width: 100%;
   padding: 30px;
-  background-color: #ffffff; 
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); 
-  text-align: center; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
 .ford-logo-top {
-  width: 120px; 
+  width: 120px;
   height: auto;
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .welcome-title {
   font-size: 2em;
   font-weight: 600;
-  color: #000e4b; 
+  color: #000e4b;
   margin-bottom: 30px;
 }
 
 .full-width-field {
   width: 100%;
-  margin-bottom: 20px; 
+  margin-bottom: 10px;
 }
 
 .full-width-field mat-label {
-    color: rgba(0, 0, 0, 0.6); 
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .full-width-field mat-icon {
-    color: rgba(0, 0, 0, 0.54); 
+    color: rgba(0, 0, 0, 0.54);
 }
 
 .toggle-container {
   display: flex;
-  justify-content: flex-start; 
-  margin-top: -10px; 
-  margin-bottom: 25px; 
+  justify-content: flex-start;
+  margin-top: -10px;
+  margin-bottom: 25px;
 }
 
 .alert-error {
-  color: #f44336; 
-  background-color: #ffebee; 
+  color: #f44336;
+  background-color: #ffebee;
   border: 1px solid #f44336;
   border-radius: 4px;
   padding: 10px;
@@ -100,7 +100,7 @@
   }
 
   .image-column {
-    min-height: 250px; 
+    min-height: 250px;
     padding: 15px;
   }
 

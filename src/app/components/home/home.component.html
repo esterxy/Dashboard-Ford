@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="push" [(opened)] ="opened">sidenav</mat-sidenav>
+  <mat-sidenav-content>Main
+    <button (click)="opened=!opened">Toggle Opened</button>
+    <button (click)="sidenav.open()">Open</button>
+    <button (click)="sidenav.close()">Close</button>
+    <button (click)="sidenav.toggle()">Toggle</button>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
