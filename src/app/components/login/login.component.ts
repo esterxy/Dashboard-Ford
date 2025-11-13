@@ -13,6 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -26,7 +27,8 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -53,5 +55,5 @@ export class LoginComponent {
     }
     this.router.navigate(['/home']);
   }
-  
+
 }

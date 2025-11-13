@@ -1,32 +1,61 @@
 
+mat-sidenav-container.app-container {
+  height:100vh;
 
-mat-sidenav-container {
-  height: 100%;
-}
-mat-sidenav, mat-sidenav-content {
-  padding: 16px;
 }
 
-mat-sidenav{
-  background-color: white;
+mat-toolbar {
+  background-color: #0a1135;
+  color: #fff;
+  padding: 0 16px;
+  position: sticky;
+}
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+
+mat-sidenav {
   width: 250px;
-
+  padding: 16px;
+  background-color: #f5f5f5;
 }
 
-#ford-logo-top{
+#ford-logo-top {
   width: 85px;
-
+  margin-bottom: 15px;
 }
 
-:host{
-  display: block;
-  height: 100vh;
+mat-sidenav-content {
+  background: url('/assets/img/ranger.png') no-repeat center center;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
 }
 
-:host ::ng-deep .mat-sidenav-container {
-  background-color: transparent;
+.conteudo-principal {
+  flex-grow: 1;
+  padding: 20px;
 }
+.card {
+  max-width: 650px;
+  height: 80%;
+  color: #060000;
+  background-color: rgba(255, 255, 255, 0.736);
+  -webkit-box-shadow: 3px 10px 10px 1px rgba(0,0,0,0.71);
+  box-shadow: 3px 10px 10px 1px rgba(0,0,0,0.71);
+  padding: 25px;
+  border: #00010462 solid 2px;
+  left: 620px;
+  top: 50px;
+  border-radius: 8px;
 
-:host ::ng-deep .mat-sidenav-content {
-  background-color: transparent;
+
+}
+#container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

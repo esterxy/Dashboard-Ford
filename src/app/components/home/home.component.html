@@ -1,17 +1,48 @@
 
-<mat-sidenav-container>
-  <div>
-    <img src="assets/img/ford.png" id="ford-logo-top">
-  </div>
-  <mat-sidenav #sidenav mode="push" [(opened)] ="opened"> <img src="assets/img/ford.png" id="ford-logo-top"></mat-sidenav>
-  <mat-sidenav-content>Main
-    <button (click)="opened=!opened">Toggle Opened</button>
-    <button (click)="sidenav.open()">Open</button>
-    <button (click)="sidenav.close()">Close</button>
-    <button (click)="sidenav.toggle()">Toggle</button>
+<mat-sidenav-container class="app-container">
+
+  <mat-sidenav #menuLateral position="start" mode="over">
+    <div class="logo-wrapper">
+      <img src="assets/img/ford.png" id="ford-logo-top">
+    </div>
+    <mat-nav-list>
+      <a mat-list-item
+         routerLink="/home"
+         routerLinkActive="active-link"  (click)="menuLateral.close()">Home</a>
+
+      <a mat-list-item
+         routerLink="/dashboard"
+         routerLinkActive="active-link"  (click)="menuLateral.close()">Dashboard</a>
+    </mat-nav-list>
+
+  </mat-sidenav> <mat-sidenav-content>
+
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="menuLateral.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+    </mat-toolbar>
+
+    <div class="conteudo-principal">
+      <router-outlet></router-outlet>
+      <mat-card class="card" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content id="container">
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
   </mat-sidenav-content>
-</mat-sidenav-container>
 
+</mat-sidenav-container>
 
 

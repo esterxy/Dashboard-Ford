@@ -9,10 +9,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {RouterOutlet,RouterLink,RouterLinkActive} from '@angular/router';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, MatToolbarModule, MatSidenavModule, FormsModule, MatCardModule, MatInputModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatSlideToggleModule],
+  imports: [CommonModule, MatToolbarModule, MatSidenavModule, FormsModule, MatCardModule, MatInputModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatSlideToggleModule
+    , RouterOutlet, RouterLink, RouterLinkActive, MatListModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -3,8 +3,8 @@
 
 
 html, body {
-  width: 50%;
+  width: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: url('/assets/img/ranger.png') no-repeat center center fixed;
+  margin-top: 0;
 }
