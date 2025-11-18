@@ -1,69 +1,55 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, catchError, throwError} from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { LoginRequest, LoginResponse, User } from '../models/vehicle.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private apiUrl = 'http://localhost:3001';
+  private currentUserSubject: BehaviorSubject<User | null>;
+  public currentUser: Observable<User | null>;
 
-  private _isAuthenticated = new BehaviorSubject<boolean>(false);
-
-
-  public isAuthenticated$ = this._isAuthenticated.asObservable();
-
-  private httpUrl = 'http://localhost:3001';
-
-
-
-
-  constructor(private router: Router, private http:HttpClient) {
-
-
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    this._isAuthenticated.next(isLoggedIn);
+  constructor(private http: HttpClient) {
+    const storedUser = sessionStorage.getItem('currentUser');
+    this.currentUserSubject = new BehaviorSubject<User | null>(
+      storedUser ? JSON.parse(storedUser) : null
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public login(user: string, pass: string): boolean {
-    if (user === 'admin' && pass === '123456') {
-
-
-      localStorage.setItem('isLoggedIn', 'true');
-
-
-      this._isAuthenticated.next(true);
-
-
-      this.router.navigate(['/home']);
-      return true;
-
-    } else {
-
-      this.loginError = true;
-      return false;
-    }
+  public get currentUserValue(): User | null {
+    return this.currentUserSubject.value;
   }
 
-
-
-  public logout(): void {
-
-    localStorage.removeItem('isLoggedIn');
-
-    this._isAuthenticated.next(false);
-
-
-    this.router.navigate(['/login']);
+  login(nome: string, senha: string): Observable<LoginResponse> {
+    const body: LoginRequest = { nome, senha };
+    
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, body).pipe(
+      tap(response => {
+        const user: User = {
+          id: response.id,
+          nome: response.nome,
+          email: response.email
+        };
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+      })
+    );
   }
 
-
-
-  public isLoggedIn(): boolean {
-    return this._isAuthenticated.getValue();
+  logout(): void {
+    sessionStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
   }
 
+  isAuthenticated(): boolean {
+    return this.currentUserValue !== null;
+  }
 
-  public loginError: boolean = false;
+  getUsername(): string {
+    return this.currentUserValue?.nome || 'Usuário';
+  }
 }

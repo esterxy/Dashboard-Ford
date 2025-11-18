@@ -1,4 +1,3 @@
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
 .login-page-container {
   display: flex;
   min-height: 100vh;
@@ -13,13 +12,23 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  box-sizing: border-box;
 }
 
 .image-column img {
   max-width: 100%;
   height: auto;
-  display: block;
+  animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .login-column {
@@ -29,7 +38,6 @@
   align-items: center;
   background-color: #f8f8f8;
   padding: 40px 20px;
-  box-sizing: border-box;
 }
 
 .login-wrapper {
@@ -60,12 +68,13 @@
   margin-bottom: 10px;
 }
 
-.full-width-field mat-label {
-    color: rgba(0, 0, 0, 0.6);
+.password-toggle {
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-.full-width-field mat-icon {
-    color: rgba(0, 0, 0, 0.54);
+.password-toggle:hover {
+  color: #000e4b;
 }
 
 .toggle-container {
@@ -83,7 +92,13 @@
   padding: 10px;
   margin-bottom: 20px;
   font-size: 0.9em;
-  text-align: center;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
 }
 
 .full-width-button {
@@ -93,67 +108,36 @@
   font-weight: bold;
 }
 
+.loading-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.credentials-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 12px;
+  background: #e3f2fd;
+  border-radius: 6px;
+  color: #1976d2;
+}
 
 @media (max-width: 992px) {
   .login-page-container {
     flex-direction: column;
   }
-
-  .image-column {
-    min-height: 250px;
-    padding: 15px;
-  }
-
-  .login-column {
-    padding: 30px 15px;
-  }
-
-  .login-wrapper {
-    padding: 25px;
-    max-width: 380px;
-  }
-
-  .ford-logo-top {
-    width: 100px;
-    margin-bottom: 25px;
-  }
-
-  .welcome-title {
-    font-size: 1.8em;
-    margin-bottom: 25px;
-  }
-
-  .full-width-field {
-    margin-bottom: 15px;
-  }
-
-  .toggle-container {
-    margin-bottom: 20px;
-  }
-
-  .full-width-button {
-    padding: 12px 0;
-    font-size: 1.1em;
-  }
-}
-
-@media (max-width: 576px) {
-    .image-column {
-        min-height: 180px;
-    }
-    .login-wrapper {
-        padding: 20px;
-    }
-    .ford-logo-top {
-        width: 80px;
-        margin-bottom: 20px;
-    }
-    .welcome-title {
-        font-size: 1.6em;
-        margin-bottom: 20px;
-    }
-    .full-width-button {
-        padding: 10px 0;
-        font-size: 1em;
-    }
 }

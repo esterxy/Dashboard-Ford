@@ -12,13 +12,15 @@
 
       <form (ngSubmit)="onLogin()" #loginForm="ngForm">
         <mat-form-field appearance="outline" class="full-width-field">
-          <mat-icon matPrefix>account_circle</mat-icon> <input
+          <mat-icon matPrefix>account_circle</mat-icon>
+          <input
             matInput
             placeholder="Insira seu nome de usuário"
             required
             name="username"
             [(ngModel)]="username"
             #usernameInput="ngModel"
+            [disabled]="isLoading"
           >
           <mat-error *ngIf="usernameInput.invalid && usernameInput.touched">
             Usuário é obrigatório.
@@ -26,38 +28,55 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width-field">
-          <mat-icon matPrefix>lock</mat-icon> <input
+          <mat-icon matPrefix>lock</mat-icon>
+          <input
             matInput
-            type="password"
+            [type]="showPassword ? 'text' : 'password'"
             placeholder="Insira sua senha"
             required
             name="password"
             [(ngModel)]="password"
             #passwordInput="ngModel"
+            [disabled]="isLoading"
           >
-          <mat-icon matSuffix>visibility_off</mat-icon> <mat-error *ngIf="passwordInput.invalid && passwordInput.touched">
+          <mat-icon 
+            matSuffix 
+            (click)="togglePasswordVisibility()"
+            class="password-toggle"
+          >
+            {{ showPassword ? 'visibility' : 'visibility_off' }}
+          </mat-icon>
+          <mat-error *ngIf="passwordInput.invalid && passwordInput.touched">
             Senha é obrigatória.
           </mat-error>
         </mat-form-field>
 
         <div class="toggle-container">
-          <mat-slide-toggle [(ngModel)]="rememberMe" name="rememberMe">
+          <mat-slide-toggle 
+            [(ngModel)]="rememberMe" 
+            name="rememberMe"
+            [disabled]="isLoading"
+          >
             Logar automaticamente
           </mat-slide-toggle>
         </div>
 
         <div *ngIf="loginError" class="alert-error">
-          Usuário ou senha inválidos.
+          {{ errorMessage || 'Usuário ou senha inválidos.' }}
         </div>
 
         <button
           mat-raised-button
           color="primary"
           type="submit"
-          [disabled]="loginForm.invalid"
+          [disabled]="loginForm.invalid || isLoading"
           class="full-width-button"
         >
-          Entrar
+          <span *ngIf="!isLoading">Entrar</span>
+          <span *ngIf="isLoading" class="loading-text">
+            <mat-icon class="spinning">sync</mat-icon>
+            Entrando...
+          </span>
         </button>
       </form>
     </div>

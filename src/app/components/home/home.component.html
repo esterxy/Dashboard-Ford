@@ -1,48 +1,69 @@
-
 <mat-sidenav-container class="app-container">
 
-  <mat-sidenav #menuLateral position="start" mode="over">
+  <mat-sidenav #menuLateral position="start" mode="over" class="sidenav-custom">
     <div class="logo-wrapper">
-      <img src="assets/img/ford.png" id="ford-logo-top">
+      <img src="assets/img/ford.png" alt="Ford Logo" class="ford-logo">
     </div>
+    
     <mat-nav-list>
       <a mat-list-item
          routerLink="/home"
-         routerLinkActive="active-link"  (click)="menuLateral.close()">Home</a>
+         routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{exact: true}"
+         (click)="menuLateral.close()">
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>Home</span>
+      </a>
 
       <a mat-list-item
-         routerLink="/dashboard"
-         routerLinkActive="active-link"  (click)="menuLateral.close()">Dashboard</a>
+         routerLink="/home/dashboard"
+         routerLinkActive="active-link"
+         (click)="menuLateral.close()">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item (click)="logout()" class="logout-item">
+        <mat-icon matListItemIcon>exit_to_app</mat-icon>
+        <span matListItemTitle>Sair</span>
+      </a>
     </mat-nav-list>
+  </mat-sidenav>
 
-  </mat-sidenav> <mat-sidenav-content>
-
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="menuLateral.toggle()">
+  <mat-sidenav-content>
+    
+    <mat-toolbar color="primary" class="custom-toolbar">
+      <button mat-icon-button (click)="menuLateral.toggle()" class="menu-button">
         <mat-icon>menu</mat-icon>
       </button>
+      
+      <span class="toolbar-title">Sistema Ford</span>
+      
       <span class="spacer"></span>
+      
+      <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-button">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>person</mat-icon>
+          <span>Admin</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Sair</span>
+        </button>
+      </mat-menu>
     </mat-toolbar>
 
-    <div class="conteudo-principal">
+    <div class="content-wrapper">
       <router-outlet></router-outlet>
-      <mat-card class="card" appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content id="container">
-          <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-          </p>
-        </mat-card-content>
-      </mat-card>
     </div>
 
   </mat-sidenav-content>
 
 </mat-sidenav-container>
-
-
