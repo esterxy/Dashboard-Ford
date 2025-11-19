@@ -1,24 +1,107 @@
 <div class="welcome-container">
-
-  <mat-card class="welcome-card">
+  
+  
+  <mat-card class="welcome-card" appearance="outlined">
     <mat-card-header>
-      <mat-card-title>Bem-vindo ao Sistema Ford</mat-card-title>
-      <mat-card-subtitle>Sua plataforma de gerenciamento</mat-card-subtitle>
+      <div class="header-content">
+        <img 
+          src="assets/img/ford.png" 
+          alt="Ford Logo" 
+          class="card-logo"
+          loading="eager"
+          >
+        <div>
+          <mat-card-title class="welcome-title">
+            Bem-vindo ao Sistema Ford
+          </mat-card-title>
+          <mat-card-subtitle class="welcome-subtitle">
+            Painel de Gestão de Veículos
+          </mat-card-subtitle>
+        </div>
+      </div>
     </mat-card-header>
-    
-    <img mat-card-image src="/assets/img/ranger.png" alt="Ford Ranger" class="card-image">
-    
-    <mat-card-content>
-      <p>
-        Use o menu lateral para navegar pelas seções, como o Dashboard.
+
+    <mat-card-content class="welcome-content">
+      
+      
+      <div class="ranger-showcase">
+        <div class="ranger-content">
+          <div class="showcase-badge">
+            <mat-icon>star</mat-icon>
+            Destaque
+          </div>
+          <h2 class="ranger-title">Ford Ranger</h2>
+          <p class="ranger-description">
+            O veículo mais vendido da Ford. Robusto, versátil e conectado. 
+            Líder absoluto em vendas e tecnologia embarcada.
+          </p>
+          <div class="ranger-stats">
+            <div class="stat-item">
+              <mat-icon>shopping_cart</mat-icon>
+              <span class="stat-number">145.760</span>
+              <span class="stat-label">Unidades Vendidas</span>
+            </div>
+            <div class="stat-item">
+              <mat-icon>wifi</mat-icon>
+              <span class="stat-number">70.000</span>
+              <span class="stat-label">Conectados</span>
+            </div>
+            <div class="stat-item">
+              <mat-icon>update</mat-icon>
+              <span class="stat-number">27.550</span>
+              <span class="stat-label">Atualizados</span>
+            </div>
+          </div>
+        </div>
+        <div class="ranger-image-wrapper">
+          <img src="assets/img/ranger.png" alt="Ford Ranger" class="ranger-hero">
+          <div class="image-glow"></div>
+        </div>
+      </div>
+
+      <mat-divider class="divider"></mat-divider>
+
+      <p class="welcome-text">
+        Sistema de gerenciamento desenvolvido para apoiar a equipe de gestão 
+        nas tomadas de decisões estratégicas através de análises detalhadas.
       </p>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <mat-icon class="feature-icon">analytics</mat-icon>
+          <h3>Análise de Dados</h3>
+          <p>Visualize estatísticas em tempo real sobre vendas e conectividade</p>
+        </div>
+
+        <div class="feature-item">
+          <mat-icon class="feature-icon">directions_car</mat-icon>
+          <h3>Gestão de Veículos</h3>
+          <p>Acompanhe todos os modelos e suas atualizações de software</p>
+        </div>
+
+        <div class="feature-item">
+          <mat-icon class="feature-icon">insights</mat-icon>
+          <h3>Relatórios</h3>
+          <p>Gere relatórios detalhados para decisões estratégicas</p>
+        </div>
+      </div>
+
+      <div class="action-section">
+        <p class="action-text">
+          <mat-icon class="info-icon">info</mat-icon>
+          Acesse o Dashboard para visualizar todas as informações dos veículos
+        </p>
+        
+        <button 
+          mat-raised-button 
+          color="primary" 
+          class="dashboard-button"
+          routerLink="/home/dashboard">
+          <mat-icon>dashboard</mat-icon>
+          Acessar Dashboard
+        </button>
+      </div>
     </mat-card-content>
-    
-    <mat-card-actions align="end">
-      <button mat-flat-button color="primary" routerLink="/home/dashboard">
-        Ir para o Dashboard
-      </button>
-    </mat-card-actions>
   </mat-card>
 
 </div>

@@ -1,1 +1,233 @@
-<p>dashboard jjjjjj!</p>
+<div class="dashboard-container">
+
+  
+  <div class="dashboard-header">
+    <h1>
+      <mat-icon>dashboard</mat-icon>
+      Dashboard de Veículos Ford
+    </h1>
+    <p class="subtitle">Gestão e análise de dados em tempo real</p>
+  </div>
+
+  
+  <mat-card class="search-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>search</mat-icon>
+        Buscar por Modelo
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Selecione o modelo do veículo</mat-label>
+        <mat-icon matPrefix>directions_car</mat-icon>
+        <input 
+          matInput
+          type="text"
+          placeholder="Ex: Ranger, Mustang, Territory..."
+          [formControl]="modelSearchControl"
+          [matAutocomplete]="auto"
+        >
+        <button 
+          mat-icon-button 
+          matSuffix 
+          *ngIf="modelSearchControl.value" 
+          (click)="clearModelSearch()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onModelSelected($event)">
+          <mat-option *ngFor="let model of filteredModels$ | async" [value]="model">
+            <mat-icon>directions_car</mat-icon>
+            {{ model }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  
+  <div class="stats-grid">
+    
+    <mat-card class="stat-card sales-card" appearance="outlined">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>attach_money</mat-icon>
+        </div>
+        <div class="stat-content">
+          <h3>Volume Total</h3>
+          <p class="stat-value">{{ selectedVehicle?.volumetotal || 0 | number }}</p>
+          <span class="stat-label">unidades vendidas</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card connected-card" appearance="outlined">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>wifi</mat-icon>
+        </div>
+        <div class="stat-content">
+          <h3>Veículos Conectados</h3>
+          <p class="stat-value">{{ selectedVehicle?.connected || 0 | number }}</p>
+          <span class="stat-label">ao sistema Ford</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card updated-card" appearance="outlined">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>update</mat-icon>
+        </div>
+        <div class="stat-content">
+          <h3>Software Atualizado</h3>
+          <p class="stat-value">{{ selectedVehicle?.softwareUpdates || 0 | number }}</p>
+          <span class="stat-label">veículos atualizados</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  
+  <mat-card class="vehicle-image-card" appearance="outlined" *ngIf="selectedVehicle">
+    <mat-card-content>
+      <div class="image-wrapper">
+        <img 
+          [src]="selectedVehicle.img" 
+          [alt]="selectedVehicle.vehicle"
+          class="vehicle-image"
+          (error)="onImageError($event)"
+        >
+        <div class="image-overlay">
+          <h2>{{ selectedVehicle.vehicle }}</h2>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  
+  <mat-card class="table-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>format_list_bulleted</mat-icon>
+        Busca Detalhada por Código VIN
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      
+      
+      <mat-form-field appearance="outline" class="full-width search-field">
+        <mat-label>Buscar por código VIN do veículo</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input 
+          matInput
+          placeholder="Ex: 2FRHDUYS2Y63NHD22454"
+          [formControl]="vinSearchControl"
+          (keyup.enter)="searchByVIN()"
+        >
+        <button 
+          mat-icon-button 
+          matSuffix 
+          *ngIf="vinSearchControl.value" 
+          (click)="clearVINSearch()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button 
+        mat-raised-button 
+        color="primary" 
+        class="search-button"
+        (click)="searchByVIN()"
+        [disabled]="!vinSearchControl.value || isSearching"
+      >
+        <mat-icon>search</mat-icon>
+        {{ isSearching ? 'Buscando...' : 'Buscar' }}
+      </button>
+
+      
+      <div *ngIf="searchError" class="search-error">
+        <mat-icon>error_outline</mat-icon>
+        {{ searchErrorMessage }}
+      </div>
+
+      
+      <div *ngIf="vehicleData && !searchError" class="vehicle-data-grid">
+        
+        <div class="data-card">
+          <div class="data-icon">
+            <mat-icon>speed</mat-icon>
+          </div>
+          <div class="data-content">
+            <h4>Odômetro</h4>
+            <p class="data-value">{{ vehicleData.odometro | number }} km</p>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-icon fuel-icon">
+            <mat-icon>local_gas_station</mat-icon>
+          </div>
+          <div class="data-content">
+            <h4>Nível de Combustível</h4>
+            <p class="data-value">{{ vehicleData.nivelCombustivel }}%</p>
+            <div class="fuel-bar">
+              <div 
+                class="fuel-fill" 
+                [style.width.%]="vehicleData.nivelCombustivel"
+                [class.fuel-low]="vehicleData.nivelCombustivel < 30"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="data-icon" [class.status-on]="vehicleData.status === 'on'">
+            <mat-icon>{{ vehicleData.status === 'on' ? 'power_settings_new' : 'power_off' }}</mat-icon>
+          </div>
+          <div class="data-content">
+            <h4>Status</h4>
+            <p class="data-value">
+              <span [class]="getStatusClass(vehicleData.status)">
+                {{ formatStatus(vehicleData.status) }}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="data-card location-card">
+          <div class="data-icon">
+            <mat-icon>location_on</mat-icon>
+          </div>
+          <div class="data-content">
+            <h4>Localização</h4>
+            <p class="data-value">
+              Lat: {{ vehicleData.lat }}<br>
+              Long: {{ vehicleData.long }}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      
+      <div *ngIf="!vehicleData && !searchError" class="instructions">
+        <mat-icon>info</mat-icon>
+        <p>Digite um código VIN e clique em "Buscar" para visualizar os dados detalhados</p>
+        <div class="available-vins">
+          <strong>VINs disponíveis para teste:</strong>
+          <ul>
+            <li *ngFor="let vin of availableVINs">
+              <code (click)="useVIN(vin)">{{ vin }}</code>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>
